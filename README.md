@@ -1,7 +1,7 @@
 # Getting Started with Create React App
 
 # level-1:
-create a store:- const store = new createStore();
+create a store:- const store = new createStore(reducer);
 create a reducer:- function reducer() { return "state"}
 get the state by using:- store.getState();
 
@@ -16,7 +16,6 @@ function reducer(state, action) {
   switch (action.type) {
     case "sampleAction":
       return action.payload.state;
-      break;
     default:
       return state;
   }
@@ -34,6 +33,7 @@ console.log(store.getState());
 
 # level-3:
 combine multiple reducers:
+Adding window redux devtools in the store:
 
 // output of above
 import { combineReducers, createStore } from "redux";
@@ -41,7 +41,6 @@ function userReducer(state = "", action) {
   switch (action.type) {
     case "updateUser":
       return action.payload.state;
-      break;
     default:
       return state;
   }
@@ -53,10 +52,14 @@ const combinedReducers = combineReducers({
   user: userReducer,
   products: productReducer,
 });
-const store = new createStore(combinedReducers, {
-  user: "sajith",
-  products: [{ age: 24, sex: "Male" }],
-});
+const store = new createStore(
+  combinedReducers, 
+  {
+    user: "sajith",
+    products: [{ age: 24, sex: "Male" }],
+  },
+  window.devToolsExtension && window.devToolsExtension()
+);
 const action = {
   type: "updateUser",
   payload: {

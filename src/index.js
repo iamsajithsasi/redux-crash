@@ -5,44 +5,65 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { combineReducers, createStore } from "redux";
+import { Provider } from "react-redux";
 
+// must set initial state to reducer or it will error as uninitialized
 function userReducer(state = "", action) {
   switch (action.type) {
     case "updateUser":
       return action.payload.state;
-      break;
     default:
       return state;
   }
 }
+// must set initial state to reducer or it will error as uninitialized
 function productReducer(state = [], action) {
   return state;
 }
 
 const combinedReducers = combineReducers({
+  // usually reducer returns values, so we are assigning it to user, product respectively
   user: userReducer,
   products: productReducer,
 });
 
-const store = new createStore(combinedReducers, {
-  user: "sajith",
-  products: [{ age: 24, sex: "Male" }],
-});
-
-const action = {
-  type: "updateUser",
-  payload: {
-    state: "John",
+const store = new createStore(
+  // combine multiple reducers
+  combinedReducers,
+  // initial values
+  {
+    user: "sajith",
+    products: [{ age: 24, sex: "Male" }],
   },
-};
+  // react dev tools extension
+  window.devToolsExtension && window.devToolsExtension()
+);
 
-store.dispatch(action);
+// const action = {
+//   type: "updateUser",
+//   payload: {
+//     state: "John",
+//   },
+// };
 
-console.log(store.getState());
+// store.dispatch(action);
+
+// console.log(store.getState());
+
+export function actionNew(user) {
+  return {
+    type: "updateUser",
+    payload: {
+      state: user,
+    },
+  };
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App name="sample" />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
