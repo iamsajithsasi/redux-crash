@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
 import { connect } from "react-redux";
@@ -30,9 +30,13 @@ const mapStateToProps = (state) => ({
 });
 
 // single action
-const mapActionsToProps = {
-  updateUser: actionNew,
-};
+// const mapActionsToProps = {
+//   updateUser: actionNew,
+// };
+
+// const mapDispatchToProps = {
+//   updateUser: actionNew,
+// };
 
 // multiple actions
 // const mapActionsToProps = {
@@ -50,9 +54,22 @@ const mapActionsToProps = {
 //   );
 // };
 
+const mapDispatchToProps = (dispatch, props) => {
+  return bindActionCreators(
+    {
+      updateUser: actionNew,
+    },
+    dispatch
+  );
+};
+
 // const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
 //   console.log(propsFromState, propsFromDispatch, ownProps);
 //   return {};
 // };
 
-export default connect(mapStateToProps, mapActionsToProps)(App);
+export default connect(
+  mapStateToProps,
+  // mapActionsToProps,
+  mapDispatchToProps
+)(App);
