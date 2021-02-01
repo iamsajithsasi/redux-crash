@@ -6,27 +6,26 @@ import { actionNew } from "./index.js";
 import { bindActionCreators } from "redux";
 
 function App(props) {
-  const { a, b } = props;
+  const { products, users } = props;
 
   const updateUserFn = () => {
-    console.log(props);
-    props.updateUser("Bhavya");
+    fetch("https://jsonplaceholder.typicode.com/todos/1")
+      .then((response) => response.json())
+      .then((json) => props.updateUser(json.title));
   };
-  console.log(a);
-  console.log(b);
 
   return (
     <div>
       <header>Redux Crash</header>
       <button onClick={updateUserFn}>Click</button>
-      <p>{b}</p>
+      <p>{users}</p>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  a: state.products,
-  b: state.user,
+  products: state.products,
+  users: state.user,
 });
 
 // single action
@@ -34,9 +33,9 @@ const mapStateToProps = (state) => ({
 //   updateUser: actionNew,
 // };
 
-// const mapDispatchToProps = {
-//   updateUser: actionNew,
-// };
+const mapDispatchToProps = {
+  updateUser: actionNew,
+};
 
 // multiple actions
 // const mapActionsToProps = {
@@ -54,14 +53,14 @@ const mapStateToProps = (state) => ({
 //   );
 // };
 
-const mapDispatchToProps = (dispatch, props) => {
-  return bindActionCreators(
-    {
-      updateUser: actionNew,
-    },
-    dispatch
-  );
-};
+// const mapDispatchToProps = (dispatch, props) => {
+//   return bindActionCreators(
+//     {
+//       updateUser: actionNew,
+//     },
+//     dispatch
+//   );
+// };
 
 // const mergeProps = (propsFromState, propsFromDispatch, ownProps) => {
 //   console.log(propsFromState, propsFromDispatch, ownProps);
