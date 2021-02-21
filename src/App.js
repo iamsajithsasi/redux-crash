@@ -1,9 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
 import "./App.css";
 import SimpleActions from "./components/simpleaction";
 import DispathActions from "./components/dispacthaction";
-
-import { connect } from "react-redux";
+import UpdateTodos from "./components/updatetodos";
 
 function App({ defaultState }) {
   return (
@@ -16,6 +16,7 @@ function App({ defaultState }) {
           <div className="col-md-8">
             <SimpleActions />
             <DispathActions />
+            <UpdateTodos />
           </div>
           <div className="col-md-4">
             {JSON.stringify(defaultState, null, 2)}
