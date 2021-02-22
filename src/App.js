@@ -15,7 +15,9 @@ function App({ defaultState }) {
         <div className="row">
           <div className="col-md-8">
             <SimpleActions />
+            <br />
             <DispathActions />
+            <br />
             <UpdateTodos />
           </div>
           <div className="col-md-4">

@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { updateUser } from "../store/actions";
 import { connect } from "react-redux";
 
 function DispathActions(props) {
-  const [user, setUser] = useState("");
+  const [user, setUser] = useState(props.defaultState.states.user);
 
   const updateUserFn = () => {
     props.updateUser(user);
     setUser("");
   };
+
+  useEffect(() => {
+    setUser(props.defaultState.states.user);
+  }, [props.defaultState.states.user]);
 
   return (
     <div>
@@ -23,4 +27,8 @@ function DispathActions(props) {
 
 const mapDispatchToProps = { updateUser };
 
-export default connect(null, mapDispatchToProps)(DispathActions);
+const mapStateToProps = (state) => ({
+  defaultState: state,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DispathActions);
