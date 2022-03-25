@@ -1,11 +1,14 @@
 # Getting Started with Create React App
 
 # level-1:
+```
 create a store:- const store = new createStore(reducer);
 create a reducer:- function reducer() { return "state"}
 get the state by using:- store.getState();
+```
 
 # level-2:
+```
 create a action:- const action = { type: "newAction", payload: {state: "New State"}}
 connect action to redux:- store.dispatch(action)
 using switch case to initiate action:- switch(action.type) {case "newAction": return action.payload.state; break; default: return state}
@@ -29,9 +32,10 @@ const action = {
 };
 store.dispatch(action);
 console.log(store.getState());
-
+```
 
 # level-3:
+```
 combine multiple reducers:
 Adding window redux devtools in the store:
 
@@ -68,8 +72,11 @@ const action = {
 };
 store.dispatch(action);
 console.log(store.getState());
+```
 
 # level-4:
+```
 Access store using provider
+```
 
 // output of above
